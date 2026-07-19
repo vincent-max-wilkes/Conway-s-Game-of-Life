@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 
 #include "seeds.h"
 
@@ -18,7 +19,7 @@ Seed initialize_seed(const char *seed)
 
     int r = HEIGHT/2;
     int c = WIDTH/2;
-
+    
     //block (still life)
     if(strcmp(seed, "block") == 0){
 	result.grid[r][c] = ALIVE;

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 #include "seeds.h"
 #include "userinput.h"
@@ -73,8 +75,11 @@ int main(int argc, char **argv)
 	    break;
 	}
 
-	memcpy(game.grid, next_grid, sizeof(game.grid));
+	system("clear"); //clears screen -> animation
+	printgame(next_grid, game.alive);
+    
+	usleep(100000);
 
-       printgame(next_grid, game.alive);
+	memcpy(game.grid, next_grid, sizeof(game.grid));
     }
 }
