@@ -20,14 +20,24 @@ Seed initialize_seed(const char *seed)
     int r = HEIGHT/2;
     int c = WIDTH/2;
     
+    //random
+    if(strcmp(seed, "random") == 0){
+	for(int i = 0; i < HEIGHT; i++)
+	{
+	    for(int j = 0; j < WIDTH; j++)
+	    {
+		if(rand() % 100 < 20)
+		    result.grid[i][j] = ALIVE;
+	    }
+	}
+    }
+
     //block (still life)
-    if(strcmp(seed, "block") == 0){
+    else if(strcmp(seed, "block") == 0){
 	result.grid[r][c] = ALIVE;
 	result.grid[r][c+1] = ALIVE;
 	result.grid[r+1][c] = ALIVE;
 	result.grid[r+1][c+1] = ALIVE;
-
-	result.alive = 4;
 
     }
 
@@ -41,8 +51,6 @@ Seed initialize_seed(const char *seed)
 	result.grid[r+2][c+1] = ALIVE;
 	result.grid[r+1][c+2] = ALIVE;
 	result.grid[r][c+2] = ALIVE;
-
-	result.alive = 6;
     }
 
     //blinker (oscillator)
@@ -50,8 +58,6 @@ Seed initialize_seed(const char *seed)
 	result.grid[r][c] = ALIVE;
 	result.grid[r+1][c] = ALIVE;
 	result.grid[r+2][c] = ALIVE;
-	
-	result.alive = 3;
     }
 
     // toad (oscillator)
@@ -62,8 +68,6 @@ Seed initialize_seed(const char *seed)
 	result.grid[r+1][c] = ALIVE;
 	result.grid[r+1][c+1] = ALIVE;
 	result.grid[r+1][c+2] = ALIVE;
-
-	result.alive = 6;
     }
 
     // beacon (oscillator)
@@ -76,8 +80,6 @@ Seed initialize_seed(const char *seed)
 	result.grid[r+2][c+3] = ALIVE;
 	result.grid[r+3][c+2] = ALIVE;
 	result.grid[r+3][c+3] = ALIVE;
-
-	result.alive = 8;
     }
 
     // glider (spaceship)
@@ -87,8 +89,6 @@ Seed initialize_seed(const char *seed)
 	result.grid[r+2][c] = ALIVE;
 	result.grid[r+2][c+1] = ALIVE;
 	result.grid[r+2][c+2] = ALIVE;
-
-	result.alive = 5;
     }
 
     // lightweight spaceship
@@ -102,26 +102,17 @@ Seed initialize_seed(const char *seed)
 	result.grid[r+3][c] = ALIVE;
 	result.grid[r+3][c+1] = ALIVE;
 	result.grid[r+3][c+2] = ALIVE;
-
-	result.alive = 9;
     }
 
     // acorn
     else if(strcmp(seed, "acorn") == 0){
-	int r = HEIGHT/2;
-	int c = WIDTH/2;
-
 	result.grid[r][c+1] = ALIVE;
-
 	result.grid[r+1][c+3] = ALIVE;
-
 	result.grid[r+2][c] = ALIVE;
 	result.grid[r+2][c+1] = ALIVE;
 	result.grid[r+2][c+4] = ALIVE;
 	result.grid[r+2][c+5] = ALIVE;
 	result.grid[r+2][c+6] = ALIVE;
-
-	result.alive = 7;
     }
     return result;
 }

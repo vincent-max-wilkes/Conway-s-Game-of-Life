@@ -2,10 +2,26 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "seeds.h"
 #include "userinput.h"
 
+int count_alive(char grid[HEIGHT][WIDTH]){
+    int alive = 0;
+
+    for(int i = 0; i < HEIGHT; i++)
+    {
+	for(int j = 0; j < WIDTH; j++)
+	{
+	    if(grid[i][j] == ALIVE){
+		alive++;
+	    }
+	}
+    }
+    
+    return alive;
+}
 
 void printgame(char a[][WIDTH], int b)
 {
@@ -25,21 +41,26 @@ int main(int argc, char **argv)
     int gens = get_gens(argc, argv);
     char *seed = get_seed(argc, argv);
 
+    int current_gen = 0;
+
     Seed game;
     game = initialize_seed(seed);
-    
-    printgame(game.grid, game.alive);
 
+    int alive = count_alive(game.grid);
+    printgame(game.grid, alive);
+    
     char next_grid[HEIGHT][WIDTH] = {0};
 
     for(int a = 0; a < gens; a++){
-	game.alive = 0;
+	alive = 0;
+	srand(time(NULL));
 
 	for(int i = 0; i < HEIGHT; i++)
 	{
 	    for(int j = 0; j < WIDTH; j++)
 	    {
 		int neighbour = 0;
+
 		for(int di = -1; di < 2; di++)
 		{
 		    for(int dj = -1; dj < 2; dj++)
@@ -60,25 +81,26 @@ int main(int argc, char **argv)
 		//rules
 		if(game.grid[i][j] == ALIVE && (neighbour == 2 || neighbour == 3)){
 		    next_grid[i][j] = ALIVE; //equilibrium
-		    game.alive++;
+		    alive++;
 		}
 		else if(game.grid[i][j] == DEAD && neighbour == 3){
 		    next_grid[i][j] = ALIVE; //reproductiuon
-		    game.alive++;
+		    alive++;
 		}
 		else{
 		    next_grid[i][j] = DEAD; //includes underpopulation, overpopulation and nothing
 		}
 	    }
 	}
-	if(game.alive == 0){
+	if(alive == 0){
+	    printf("The civlisation died after %d generations", current_gen);
 	    break;
 	}
 
 	system("clear"); //clears screen -> animation
-	printgame(next_grid, game.alive);
+	printgame(next_grid, alive);
     
-	usleep(100000);
+	usleep(200000);
 
 	memcpy(game.grid, next_grid, sizeof(game.grid));
     }

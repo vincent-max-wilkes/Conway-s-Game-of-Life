@@ -11,7 +11,6 @@
 
 typedef struct {
     char grid[HEIGHT][WIDTH];
-    int alive;
 } Seed;
 
 Seed initialize_seed(const char *seed);
