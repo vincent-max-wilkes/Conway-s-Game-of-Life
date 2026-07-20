@@ -55,8 +55,8 @@ Seed initialize_seed(const char *seed)
 
     //blinker (oscillator)
     else if(strcmp(seed, "blinker") == 0){
-	result.grid[r][c] = ALIVE;
-	result.grid[r+1][c] = ALIVE;
+	//result.grid[r][c] = ALIVE;
+	//result.grid[r+1][c] = ALIVE;
 	result.grid[r+2][c] = ALIVE;
     }
 

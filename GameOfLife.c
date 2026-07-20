@@ -33,13 +33,18 @@ void printgame(char a[][WIDTH], int b)
 	}
 	printf("\n");
     }
-    printf("%d cells are alive!\n\n", b);
+    if(b == 1){ //for correct grammar
+	printf("1 cell is alive\n");
+    }
+    else if(b > 1){
+	printf("%d cells are alive!\n\n", b);
+    }
 }
 
 int main(int argc, char **argv)
 {
-    srand(time(NULL)); //reset random generation (not working)
-		       //
+    srand(time(NULL)); //reset random generation 
+		       
     int gens = get_gens(argc, argv);
     char *seed = get_seed(argc, argv);
 
@@ -93,8 +98,16 @@ int main(int argc, char **argv)
 		}
 	    }
 	}
+	current_gen++;
+
 	if(alive == 0){
-	    printf("The civlisation died after %d generations", current_gen);
+	    if(current_gen == 1){ //for correct grammar
+		printf("The civilisation died after 1 generation");
+	    }
+	    else if(current_gen != 1){
+		printf("The civilisation died after %d generations", current_gen);
+	    }
+
 	    break;
 	}
 
