@@ -1,8 +1,8 @@
 #ifndef SEEDS_H
 #define SEEDS_H
 
-#define WIDTH 80
-#define HEIGHT 40
+#define WIDTH 200
+#define HEIGHT 100
 
 #define DEAD '.'
 #define ALIVE '#'

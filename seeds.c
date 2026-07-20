@@ -23,7 +23,7 @@ Seed initialize_seed(const char *seed)
     //random
     if(strcmp(seed, "random") == 0){
 	for(int i = 0; i < HEIGHT; i++)
-	{
+	{ 
 	    for(int j = 0; j < WIDTH; j++)
 	    {
 		if(rand() % 100 < 20)

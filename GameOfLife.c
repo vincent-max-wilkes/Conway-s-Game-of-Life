@@ -38,6 +38,8 @@ void printgame(char a[][WIDTH], int b)
 
 int main(int argc, char **argv)
 {
+    srand(time(NULL)); //reset random generation (not working)
+		       //
     int gens = get_gens(argc, argv);
     char *seed = get_seed(argc, argv);
 
@@ -53,7 +55,6 @@ int main(int argc, char **argv)
 
     for(int a = 0; a < gens; a++){
 	alive = 0;
-	srand(time(NULL));
 
 	for(int i = 0; i < HEIGHT; i++)
 	{
@@ -100,7 +101,7 @@ int main(int argc, char **argv)
 	system("clear"); //clears screen -> animation
 	printgame(next_grid, alive);
     
-	usleep(200000);
+	usleep(400000);
 
 	memcpy(game.grid, next_grid, sizeof(game.grid));
     }
